@@ -3,19 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import promiseMiddleware from 'redux-promise';
-import ReduxThunk from 'redux-thunk';
 import { BrowserRouter } from 'react-router-dom';
+import Post from './components/views/Post/Post';
 
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore) // redux에서 가져와진다.
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <Provider store = {createStoreWithMiddleware()}>
       <App />
-    </Provider>
   </BrowserRouter>
 );
 

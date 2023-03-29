@@ -4,6 +4,7 @@ import Home from '../Home';
 import Dashboard from '../Dashboard/Dashboard';
 import Post from '../Post/Post';
 import User from '../User/User';
+import UserPosts from '../User/UserPosts';
 
 const NavBar = () => {
   return (
@@ -19,9 +20,10 @@ const NavBar = () => {
       <hr />
       <Routes>
         <Route exact path = '/' element={<Home />} index />
-        <Route exact path= '/dashboard' element={<Dashboard />} />
-        <Route exact path="/post" element={<Post />} />
-        <Route exact path="/users" element={<User />} />
+        <Route exact path = '/dashboard' element={<Dashboard />} />
+        <Route exact path = "/post" element={<Post />} />
+        <Route exact path = "/users" element={<User />} />
+        <Route exact path = '/users/:userId/posts' element={<UserPosts />} />
       </Routes>
     </div>
   );

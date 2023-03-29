@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import UserDetail from './UserDetail';
 
 function User() {
 	const [info, setInfo] = useState([]);
@@ -37,17 +38,10 @@ function User() {
 					</thead>
 					<tbody>
 						{
-							info.map(element =>
-								<tr>
-									<td>{element.userId}</td>
-									<td>{element.userNickname}</td>
-									<td>{element.userAbout}</td>
-									<td>{element.userStatus}</td>
-									<td>{element.userJoinedAt}</td>
-									<td>{element.userCreatedAt} </td>
-									<td>{element.userUpdatedAt}</td>
-								</tr>
-						)}
+							info.map( function(view, i) {
+								return <UserDetail view = {view} key={i} />
+							})
+						}
 					</tbody>
 				</table>
 			</div>

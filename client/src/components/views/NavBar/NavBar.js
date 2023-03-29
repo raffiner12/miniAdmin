@@ -23,7 +23,7 @@ const NavBar = () => {
         <Route exact path = '/dashboard' element={<Dashboard />} />
         <Route exact path = "/post" element={<Post />} />
         <Route exact path = "/users" element={<User />} />
-        <Route exact path = '/users/:userId/posts' element={<UserPosts />} />
+        <Route exact path = '/users/:userId/posts' element={<UserPosts userId={User} />} />
       </Routes>
     </div>
   );

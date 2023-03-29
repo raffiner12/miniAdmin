@@ -13,7 +13,7 @@ const NavBar = () => {
           <Link to="/">[홈]</Link>
           <Link to="/dashboard">[대시보드]</Link>
           <Link to="/post">[게시판]</Link>
-          <Link to="/user">[사용자]</Link>
+          <Link to="/users">[사용자]</Link>
         </li>
       </ul>
       <hr />
@@ -21,7 +21,7 @@ const NavBar = () => {
         <Route exact path = '/' element={<Home />} index />
         <Route exact path= '/dashboard' element={<Dashboard />} />
         <Route exact path="/post" element={<Post />} />
-        <Route exact path="/user" element={<User />} />
+        <Route exact path="/users" element={<User />} />
       </Routes>
     </div>
   );

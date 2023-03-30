@@ -33,10 +33,10 @@ function Comments() {
 
 	function PostTitleContent(props){
 		console.log("props", props); // 배열 받아와짐.
-		console.log("props2", props[0]); // undefined
-		// console.log("props3", props[0].postId); // 오류남
-		console.log("props3", props.data); // undefined
-		console.log("props4", props.content);
+		// console.log("props2", props[0]); // undefined
+		// // console.log("props3", props[0].postId); // 오류남
+		// console.log("props3", props.data); // undefined
+		// console.log("props4", props.content);
 		// const list = []
 		// for (let i = 0; i< props.)
 
@@ -46,12 +46,39 @@ function Comments() {
 		// for(let i = 0; i < 1; i++){
 		// 	let P = props.
 		// }
+		// console.log("Object.keys", Object.keys(props)) // title, content
+		// console.log("Object.values", Object.values(props)) // 내용 출력
+		// //console.log("Object.values.content", Object.values(props.content)) // 오류남
+
+		// const final = Object.values(props).slice(0,1);
+		// console.log(final);
+
+
+		// var title = Object.values(props);
+		// console.log("title",title);
+		// console.log(title[0]); // 제목 받아와짐.
+		// console.log(title[1]); // 내용 받아와짐.
+		// const final2 = title.slice(0,4);
+		// console.log(final2);
+
+		// var content = props;
+		// console.log(content);
+	
+		var final3 = props.element.slice(0,1);
+		console.log(final3);
+		console.log(final3.postTitle)
 		return (
 			<>
-				<h1>{props.title}</h1>
+				{/* <h1>{content.title}</h1>
 				<div>
 					<span>{props.content}</span>
 				</div>
+				<hr />
+					<p>
+						{final2.postid}
+					</p> */}
+				{final3.postTitle}
+				<hr />
 			</>
 
 		);
@@ -66,25 +93,25 @@ function Comments() {
 					<div>
 							{/* {postTitleContent(viewPost2)} */}
 							<PostTitleContent element={viewPost} />
-							{
+							{/* {
 								viewPost.map(content => {
 									console.log(content) // 객체로 출력됨.
-									var c = <PostTitleContent title={content.postTitle} content={content.postContent} />
+									var c = <PostTitleContent title={content.postTitle} content={htmlParser(content.postContent)} />
 
 									return c;
-								},0)
-							}
+								},)
+							} */}
 					</div>
 					<hr />
 					<table border="1">
 						<thead>
 							<tr>
-								<th>commentId</th>
-								<th>commentContent</th>
-								<th>commentDeleted</th>
-								<th>commentPublishedAt</th>
-								<th>commentCreatedAt</th>
-								<th>commentUpdatedAt</th>
+								<th>번호</th>
+								<th>댓글 내용</th>
+								<th>삭제</th>
+								<th>작성일</th>
+								<th>생성일</th>
+								<th>수정일</th>
 							</tr>
 						</thead>
 						<tbody>

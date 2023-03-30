@@ -18,14 +18,14 @@ function Post() {
       <table border="1">
         <thead>
           <tr>
-            <th>postId</th>
-            <th>postTitle</th>
-            <th>postDeleted</th>
-            <th>postViewCount</th>
-            <th>userId</th>
-            <th>postPublishedAt</th>
-            <th>postCreatedAt</th>
-            <th>postUpdatedAt</th>
+            <th>번호</th>
+            <th>제목</th>
+            <th>삭제</th>
+            <th>조회수</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>생성일</th>
+            <th>수정일</th>
           </tr>
         </thead>
         <tbody>

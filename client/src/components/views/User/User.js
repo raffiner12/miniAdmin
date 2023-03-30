@@ -27,13 +27,13 @@ function User() {
 				<table border="1">
 					<thead>
 						<tr>
-							<th>userId</th>
-							<th>nickname</th>
-							<th>about</th>
-							<th>status</th>
-							<th>joinedAt</th>
-							<th>createdAt</th>
-							<th>updatedAt</th>
+							<th>사용자 ID</th>
+							<th>닉네임</th>
+							<th>자기 소개</th>
+							<th>활동 여부</th>
+							<th>가입일</th>
+							<th>생성일</th>
+							<th>수정일</th>
 						</tr>
 					</thead>
 					<tbody>

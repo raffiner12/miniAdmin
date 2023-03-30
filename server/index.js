@@ -67,7 +67,7 @@ app.get('/posts', (req, res) => {
 // 특정 게시글의 내용(content) 조회
 app.get('/posts/:postId', (req, res) => {
     let postId = req.params.postId;
-    console.log("postId",postId);
+    //console.log("postId",postId);
 
     var sql = `SELECT postTitle, postContent FROM post WHERE postId = ?`;
 
@@ -75,7 +75,7 @@ app.get('/posts/:postId', (req, res) => {
         if (error) {
             throw error;
         }
-        console.log("result", result);
+        //console.log("result", result);
         res.send(result);
     })
 })
@@ -92,6 +92,31 @@ app.get('/posts/:postId/comments', (req, res) => {
             throw error;
         }
         //console.log("result", result);
+        res.send(result);
+    })
+})
+
+// 대시보드 --------------------------------
+// 총 사용자 수
+app.get(`/dashboard/totalUsers`, (req, res) => {
+    var sql = `SELECT COUNT(userId) FROM user;`;
+    db.query(sql, (error, result) => {
+        if(error){
+            throw error;
+        }
+        //console.log("result", result);
+        res.send(result);
+    })
+})
+
+// 3월 신규 유입된 사용자 수
+app.get(`/dashboard/MarchNewUser`, (req, res) => {
+    var sql = `SELECT COUNT(userId) FROM user WHERE userJoinedAt like '2023-03-%'`;
+    db.query(sql, (error, result) => {
+        if(error){
+            throw error;
+        }
+        console.log("result", result);
         res.send(result);
     })
 })

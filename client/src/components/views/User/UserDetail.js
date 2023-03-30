@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const UserDetail = ( { view }) => {
 
     // 날짜 포맷 
-    // let moment = require('moment');
-    // let joinedAt = moment(view.userJoinedAt).format('YYYY-MM-DD');
-    // let createdAt = moment(view.userCreatedAt).format('YYYY-MM-DD');
+    let moment = require('moment');
+    let joinedAt = moment(view.userJoinedAt).format('YYYY-MM-DD');
+    let createdAt = moment(view.userCreatedAt).format('YYYY-MM-DD');
     // let updatedAt = moment(view.userUpdatedAt).format('YYYY-MM-DD');
 
     return (
@@ -15,8 +15,8 @@ const UserDetail = ( { view }) => {
             <td>{view.userNickname}</td>
             <td>{view.userAbout}</td>
             <td>{view.userStatus}</td>
-            <td>{view.userJoinedAt}</td>
-            <td>{view.userCreatedAt} </td>
+            <td>{joinedAt}</td>
+            <td>{createdAt} </td>
             <td>{view.userUpdatedAt}</td>
         </tr>
     )

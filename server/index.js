@@ -53,13 +53,31 @@ app.get('/users/:userId/posts', (req, res) => {
     })
 })
 
+// 게시글 목록 조회
+app.get('/posts', (req, res) => {
+    let sql = "SELECT * FROM post;";
+    db.query(sql, (err, result) => {
+        res.send(result);
+    });
+});
+
+// 특정 게시글의 댓글 조회
+app.get('/posts/:postId/comments', (req, res) => {
+    let postId = req.params.postId;
+    console.log("postId",postId);
+    db.query(`SELECT * FROM post WHERE postId =?`, postId, function (error, result) {
+        if (error) {
+            throw error;
+        }
+        console.log("result", result);
+        res.send(result);
+    })
+})
 
 // ------------------------------------------------------
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}!`)
 })
-
-
 
 // 리액트 프로젝트 설정
 app.use(express.static(path.join(__dirname, 'client/build')));

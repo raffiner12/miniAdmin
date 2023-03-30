@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import CommentsDetails from './CommentsDetails';
-// import htmlParser from 'html-react-parser';
+import htmlParser from 'html-react-parser';
 
 
 // 특정 사용자의 게시글 조회
@@ -61,23 +61,23 @@ function Comments() {
 		// const final2 = title.slice(0,4);
 		// console.log(final2);
 
-		// var content = props;
-		// console.log(content);
+		var content = props;
+		console.log(content);
 	
-		var final3 = props.element.slice(0,1);
-		console.log(final3);
-		console.log(final3.postTitle)
+		// var final3 = props.element.slice(0,1);
+		// console.log(final3);
+		// console.log(final3.postTitle)
 		return (
 			<>
-				{/* <h1>{content.title}</h1>
+				<h1>{content.title}</h1>
 				<div>
 					<span>{props.content}</span>
 				</div>
 				<hr />
 					<p>
-						{final2.postid}
-					</p> */}
-				{final3.postTitle}
+						{/* {final2.postid} */}
+					</p>
+				{/* {final3.postTitle} */}
 				<hr />
 			</>
 
@@ -93,14 +93,14 @@ function Comments() {
 					<div>
 							{/* {postTitleContent(viewPost2)} */}
 							<PostTitleContent element={viewPost} />
-							{/* {
+							{
 								viewPost.map(content => {
 									console.log(content) // 객체로 출력됨.
 									var c = <PostTitleContent title={content.postTitle} content={htmlParser(content.postContent)} />
 
 									return c;
 								},)
-							} */}
+							}
 					</div>
 					<hr />
 					<table border="1">

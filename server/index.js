@@ -44,7 +44,7 @@ app.get('/users/:userId/posts', (req, res) => {
     //         throw error;
     //     }
     let userId = req.params.userId;
-    console.log("userId",userId); // userId는 값이 받아와짐,
+    //console.log("userId",userId); // userId는 값이 받아와짐,
     db.query(`SELECT * FROM post WHERE userId =?`, userId, function (error2, result) {
         if (error2) {
             throw error2;
@@ -64,18 +64,34 @@ app.get('/posts', (req, res) => {
     });
 });
 
-// 특정 게시글의 내용(content)과 댓글 조회
-app.get('/posts/:postId/comments', (req, res) => {
+// 특정 게시글의 내용(content) 조회
+app.get('/posts/:postId', (req, res) => {
     let postId = req.params.postId;
     console.log("postId",postId);
 
-    var sql = `SELECT post.*, comment.* FROM post LEFT JOIN comment ON post.postId = comment.postId WHERE post.postId = ?`;
+    var sql = `SELECT postTitle, postContent FROM post WHERE postId = ?`;
 
     db.query(sql, postId, function (error, result) {
         if (error) {
             throw error;
         }
         console.log("result", result);
+        res.send(result);
+    })
+})
+
+// 특정 게시글의 댓글 조회
+app.get('/posts/:postId/comments', (req, res) => {
+    let postId = req.params.postId;
+    //console.log("postId",postId);
+
+    var sql = `SELECT comment.* FROM post LEFT JOIN comment ON post.postId = comment.postId WHERE post.postId = ?`;
+
+    db.query(sql, postId, function (error, result) {
+        if (error) {
+            throw error;
+        }
+        //console.log("result", result);
         res.send(result);
     })
 })

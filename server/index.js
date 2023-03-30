@@ -28,6 +28,7 @@ db.connect();
 //     console.log(users);
 // })
 
+// 2-2 사용자 화면 확장 API---------------------
 // 사용자 목록 조회
 app.get('/users', (req, res) => {
     let sql = "SELECT * FROM user;";
@@ -53,6 +54,8 @@ app.get('/users/:userId/posts', (req, res) => {
     })
 })
 
+
+// 2-3 게시글 화면 확장 API---------------------
 // 게시글 목록 조회
 app.get('/posts', (req, res) => {
     let sql = "SELECT * FROM post;";
@@ -61,11 +64,14 @@ app.get('/posts', (req, res) => {
     });
 });
 
-// 특정 게시글의 댓글 조회
+// 특정 게시글의 내용(content)과 댓글 조회
 app.get('/posts/:postId/comments', (req, res) => {
     let postId = req.params.postId;
     console.log("postId",postId);
-    db.query(`SELECT * FROM post WHERE postId =?`, postId, function (error, result) {
+
+    var sql = `SELECT post.*, comment.* FROM post LEFT JOIN comment ON post.postId = comment.postId WHERE post.postId = ?`;
+
+    db.query(sql, postId, function (error, result) {
         if (error) {
             throw error;
         }
@@ -73,6 +79,7 @@ app.get('/posts/:postId/comments', (req, res) => {
         res.send(result);
     })
 })
+
 
 // ------------------------------------------------------
 app.listen(PORT, () => {

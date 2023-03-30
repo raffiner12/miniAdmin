@@ -30,9 +30,10 @@ function Post() {
         </thead>
         <tbody>
           {
-		  	post.map(function (view, i) {
-            return <PostDetail view={view} key={i} />;})
-		  }
+            post.map(function (view, i) {
+              return <PostDetail view={view} key={i} />;
+            })
+          }
         </tbody>
       </table>
     </div>

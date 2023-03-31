@@ -123,18 +123,29 @@ app.get(`/dashboard/MarchNewUser`, (req, res) => {
 // 1-c.
 // 1-d. 사용자 당 평균 게시글 수
 app.get(`/dashboard/averagePost`,(req, res) => {
-    console.log("안녕");
+    //console.log("안녕");
     var sql = `SELECT (SELECT COUNT(*) FROM post) / (SELECT COUNT(*) FROM user) AS avg_posts_per_user;`
     db.query(sql, (error, result) => {
         if(error){
             throw error;
         }
-        console.log("averagePost", result);
+        //console.log("averagePost", result);
         res.send(result);
     })
 })
 
 
+// 2-a. 총 게시글 수
+app.get(`/dashboard/totalPost`, (req, res) => {
+    var sql = `SELECT COUNT(*) FROM post`;
+    db.query(sql, (error, result) => {
+        if(error){
+            throw error;
+        }
+        console.log("총 게시글 수", result);
+        res.send(result);
+    })
+})
 // ------------------------------------------------------
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}!`)

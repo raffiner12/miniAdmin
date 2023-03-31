@@ -146,6 +146,17 @@ app.get(`/dashboard/totalPost`, (req, res) => {
         res.send(result);
     })
 })
+// 2-b. 게시글의 평균 조회수
+app.get(`/dashboard/avgViewCount`,(req, res) => {
+    //console.log("안녕");
+    var sql = `SELECT (SELECT SUM(postViewCount) FROM post) / (SELECT COUNT(*) FROM post) AS avg_viewCount_per_post;`
+    db.query(sql, (error, result) => {
+        if(error){
+            throw error;
+        }
+        res.send(result);
+    })
+})
 // 2-f. 최근 일주일 신규 게시글 수
 app.get(`/dashboard/newPostsPerWeek`, (req, res) => {
     var sql = `SELECT COUNT(*) FROM post WHERE postPublishedAt >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK);`;

@@ -120,7 +120,8 @@ app.get(`/dashboard/MarchNewUser`, (req, res) => {
         res.send(result);
     })
 })
-// 1-c.
+// 1-c. 최근 2주간 접속한 사용자 수 
+
 // 1-d. 사용자 당 평균 게시글 수
 app.get(`/dashboard/averagePost`,(req, res) => {
     //console.log("안녕");
@@ -148,7 +149,6 @@ app.get(`/dashboard/totalPost`, (req, res) => {
 })
 // 2-b. 게시글의 평균 조회수
 app.get(`/dashboard/avgViewCount`,(req, res) => {
-    //console.log("안녕");
     var sql = `SELECT (SELECT SUM(postViewCount) FROM post) / (SELECT COUNT(*) FROM post) AS avg_viewCount_per_post;`
     db.query(sql, (error, result) => {
         if(error){
@@ -157,6 +157,39 @@ app.get(`/dashboard/avgViewCount`,(req, res) => {
         res.send(result);
     })
 })
+// 2-c. 게시글 당 평균 댓글의 수
+app.get(`/dashboard/avgCommentCount`,(req, res) => {
+    var sql = `SELECT (SELECT COUNT(*) FROM comment) / (SELECT COUNT(*) FROM post) AS avg_comment_per_post;`
+    db.query(sql, (error, result) => {
+        if(error){
+            throw error;
+        }
+        res.send(result);
+    })
+})
+// 2-d. 3월 신규 게시글 수 
+app.get(`/dashboard/MarchNewPosts`,(req, res) => {
+    var sql = `SELECT COUNT(*) FROM post WHERE postCreatedAt like '2023-03-%';`
+    db.query(sql, (error, result) => {
+        if(error){
+            throw error;
+        }
+        console.log("result", result);
+        res.send(result);
+    })
+})
+// 2-e. 3월 신규 게시글의 평균 조회수
+app.get(`/dashboard/avgViewCountInMarch`,(req, res) => {
+    var sql = `SELECT AVG(postViewCount) FROM post WHERE postCreatedAt like '2023-03-%';`
+    db.query(sql, (error, result) => {
+        if(error){
+            throw error;
+        }
+        console.log("avgViewCountInMarch", result);
+        res.send(result);
+    })
+})
+
 // 2-f. 최근 일주일 신규 게시글 수
 app.get(`/dashboard/newPostsPerWeek`, (req, res) => {
     var sql = `SELECT COUNT(*) FROM post WHERE postPublishedAt >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK);`;
@@ -168,7 +201,17 @@ app.get(`/dashboard/newPostsPerWeek`, (req, res) => {
         res.send(result);
     })
 })
-
+// 2-g. 최근 일주일 신규 게시글의 평균 조회수
+app.get(`/dashboard/avgViewCountPerWeek`, (req, res) => {
+    var sql = `SELECT AVG(postViewCount) FROM post WHERE postPublishedAt >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK);`;
+    db.query(sql, (error, result) => {
+        if (error) {
+            throw error;
+        }
+        console.log("result", result);
+        res.send(result);
+    })
+})
 
 // 3-a. 가장 포스팅 수가 많은 사용자 Top 5
 app.get(`/dashboard/postingTop5User`, (req, res) => {
@@ -188,7 +231,7 @@ app.get(`/dashboard/commentTop5Posting`, (req, res) => {
         if (error) {
             throw error;
         }
-        console.log("Top5CommentPost", result);
+        //console.log("Top5CommentPost", result);
         res.send(result);
     })
 })

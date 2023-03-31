@@ -142,10 +142,35 @@ app.get(`/dashboard/totalPost`, (req, res) => {
         if(error){
             throw error;
         }
-        console.log("총 게시글 수", result);
+        // console.log("총 게시글 수", result);
         res.send(result);
     })
 })
+// 2-f. 최근 일주일 신규 게시글 수
+app.get(`/dashboard/newPostsPerWeek`, (req, res) => {
+    var sql = `SELECT COUNT(*) FROM post WHERE postPublishedAt >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK);`;
+    db.query(sql, (error, result) => {
+        if (error) {
+            throw error;
+        }
+        //console.log("result", result);
+        res.send(result);
+    })
+})
+
+
+// 3-a. 가장 포스팅 수가 많은 사용자 Top 5
+app.get(`/dashboard/postingTop5User`, (req, res) => {
+    var sql = `SELECT userId, count(postId) as count from post group by userId order by count desc limit 5;`
+    db.query(sql, (error, result) => {
+        if (error) {
+            throw error;
+        }
+        console.log("Top5PostingUser", result);
+        res.send(result);
+    })
+})
+
 // ------------------------------------------------------
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}!`)

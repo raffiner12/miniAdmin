@@ -161,16 +161,26 @@ app.get(`/dashboard/newPostsPerWeek`, (req, res) => {
 
 // 3-a. 가장 포스팅 수가 많은 사용자 Top 5
 app.get(`/dashboard/postingTop5User`, (req, res) => {
-    var sql = `SELECT userId, count(postId) as count from post group by userId order by count desc limit 5;`
+    var sql = `SELECT userId, count(postId) as count from post GROUP BY userId order by count desc limit 5;`
     db.query(sql, (error, result) => {
         if (error) {
             throw error;
         }
-        console.log("Top5PostingUser", result);
+        //console.log("Top5PostingUser", result);
         res.send(result);
     })
 })
-
+// 3-b. 가장 댓글 수가 많은 게시글 Top5
+app.get(`/dashboard/commentTop5Posting`, (req, res) => {
+    var sql = `SELECT postId, COUNT(commentId) AS count FROM comment GROUP BY postId ORDER bY count desc limit 5;`
+    db.query(sql, (error, result) => {
+        if (error) {
+            throw error;
+        }
+        console.log("Top5CommentPost", result);
+        res.send(result);
+    })
+})
 // ------------------------------------------------------
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}!`)

@@ -97,7 +97,7 @@ app.get('/posts/:postId/comments', (req, res) => {
 })
 
 // 대시보드 --------------------------------
-// 총 사용자 수
+// 1-a. 총 사용자 수
 app.get(`/dashboard/totalUsers`, (req, res) => {
     var sql = `SELECT COUNT(*) FROM user;`;
     db.query(sql, (error, result) => {
@@ -109,14 +109,27 @@ app.get(`/dashboard/totalUsers`, (req, res) => {
     })
 })
 
-// 3월 신규 유입된 사용자 수
+// 1-b. 3월 신규 유입된 사용자 수
 app.get(`/dashboard/MarchNewUser`, (req, res) => {
     var sql = `SELECT COUNT(*) FROM user WHERE userJoinedAt like '2023-03-%'`;
     db.query(sql, (error, result) => {
         if(error){
             throw error;
         }
-        console.log("result", result);
+        //console.log("result", result);
+        res.send(result);
+    })
+})
+// 1-c.
+// 1-d. 사용자 당 평균 게시글 수
+app.get(`/dashboard/averagePost`,(req, res) => {
+    console.log("안녕");
+    var sql = `SELECT (SELECT COUNT(*) FROM post) / (SELECT COUNT(*) FROM user) AS avg_posts_per_user;`
+    db.query(sql, (error, result) => {
+        if(error){
+            throw error;
+        }
+        console.log("averagePost", result);
         res.send(result);
     })
 })

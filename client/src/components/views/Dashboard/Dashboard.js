@@ -8,17 +8,15 @@ function Dashboard() {
   useEffect(() => {
     axios
       .all([
-        axios.get(`http://localhost:5002/dashboard/totalUsers`),
-        axios.get(`http://localhost:5002/dashboard/MarchNewUser`),
+        axios.get(`http://localhost:5000/dashboard/totalUsers`),
+        axios.get(`http://localhost:5000/dashboard/MarchNewUser`),
       ])
       .then(
         axios.spread((res1, res2) => {
           console.log("res1", res1);
           console.log("res2", res2);
-          setTotalUsers(res1.data)
-          setNewMarch(res2.data)
-          
-
+          setTotalUsers(res1.data);
+          setNewMarch(res2.data);
         })
       )
       .catch((err) => console.log(err));
@@ -28,14 +26,16 @@ function Dashboard() {
     <div>
       <h1>Dashboard</h1>
       <div>
-        {totalUsers.map(totalUsers =>
+        {totalUsers.map((totalUsers) => (
           <div>
-            총 사용자 수 : {totalUsers[`COUNT(*)`]}
+            총 사용자 수 : {totalUsers[`COUNT(userId)`]}
           </div>
-        )}
-        {newMarch.map(newMarch =>
-        
-        )}
+        ))}
+        {newMarch.map(newMarch => (
+          <div>
+            3월 신규 유입된 사용자 수 : {newMarch[`COUNT(userId)`]}
+          </div>
+        ))}
       </div>
     </div>
   )

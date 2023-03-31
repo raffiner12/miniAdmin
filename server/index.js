@@ -99,7 +99,7 @@ app.get('/posts/:postId/comments', (req, res) => {
 // 대시보드 --------------------------------
 // 총 사용자 수
 app.get(`/dashboard/totalUsers`, (req, res) => {
-    var sql = `SELECT COUNT(userId) FROM user;`;
+    var sql = `SELECT COUNT(*) FROM user;`;
     db.query(sql, (error, result) => {
         if(error){
             throw error;
@@ -111,7 +111,7 @@ app.get(`/dashboard/totalUsers`, (req, res) => {
 
 // 3월 신규 유입된 사용자 수
 app.get(`/dashboard/MarchNewUser`, (req, res) => {
-    var sql = `SELECT COUNT(userId) FROM user WHERE userJoinedAt like '2023-03-%'`;
+    var sql = `SELECT COUNT(*) FROM user WHERE userJoinedAt like '2023-03-%'`;
     db.query(sql, (error, result) => {
         if(error){
             throw error;
